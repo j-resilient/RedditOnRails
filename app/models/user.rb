@@ -3,19 +3,19 @@
 # Table name: users
 #
 #  id              :bigint           not null, primary key
-#  name            :string           not null
+#  username        :string           not null
 #  password_digest :string           not null
-#  session_token   :integer          not null
+#  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
-    after_initialize :set_session_token
+    after_initialize :ensure_session_token
     attr_reader :password
 
     validates :name, :session_token, presence: true
     validates :password_digest, presence: { message: "Password cannot be empty." }
-    validates :name, :session_token, uniqueness: true
+    validates :username, :session_token, uniqueness: true
     validates :password, length: { minimum: 6, allow_nil: true }
 
     def password=(password)
@@ -40,10 +40,9 @@ class User < ApplicationRecord
     def reset_session!
         self.session_token = self.class.generate_session_token
         self.save!
-        self.session_token
     end
 
-    def set_session_token
+    def ensure_session_token
         self.session_token ||= self.class.generate_session_token
     end
 end
