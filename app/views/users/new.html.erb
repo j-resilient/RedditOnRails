@@ -1,8 +1,10 @@
 <%= link_to 'Login!', new_session_url %>
+<%= render 'shared/errors' %>
 <h1>New User!</h1>
 <form action="<%= users_url %>" method="post">
     <%= auth_token %>
     <label for="username">
+    <%= render 'shared/errors' %>
         Username
         <input type="text" name="user[username]" id="username">
     </label>
