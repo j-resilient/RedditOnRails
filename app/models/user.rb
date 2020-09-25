@@ -18,6 +18,12 @@ class User < ApplicationRecord
     validates :username, :session_token, uniqueness: true
     validates :password, length: { minimum: 6, allow_nil: true }
 
+    has_many :subs,
+        primary_key: :id,
+        foreign_key: :moderator_id,
+        class_name: :Sub,
+        dependent: :destroy
+
     def password=(password)
         @password = password
         self.password_digest = BCrypt::Password.create(password)
