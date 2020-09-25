@@ -1,0 +1,14 @@
+<%= link_to 'Login!', new_session_url %>
+<h1>New User!</h1>
+<form action="<%= users_url %>" method="post">
+    <%= auth_token %>
+    <label for="username">
+        Username
+        <input type="text" name="user[username]" id="username">
+    </label>
+    <label for="password">
+        Password
+        <input type="password" name="user[password]" id="password">
+    </label>
+    <input type="submit" value="Create User">
+</form>
