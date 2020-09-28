@@ -14,6 +14,11 @@ class PostsController < ApplicationController
         end
     end
 
+    def show
+        @post = Post.find_by(id: params[:id])
+        render :show
+    end
+
     private
     def post_params
         params.require(:post).permit(:title, :url, :content, :sub_id)
