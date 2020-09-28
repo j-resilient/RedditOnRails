@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     def new
+        @post = Post.new
         render :new
     end
 
@@ -7,6 +8,7 @@ class PostsController < ApplicationController
         post = Post.new(post_params)
         post.author_id = current_user.id
         if post.save
+            redirect_to post_url(post)
             render json: post
         else
             flash.now[:errors] = post.errors.full_messages
