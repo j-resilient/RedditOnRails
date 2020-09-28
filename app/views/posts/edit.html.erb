@@ -1,0 +1,30 @@
+<h1>Edit Post!</h1>
+<%= render 'shared/errors' %>
+<form action="<%= post_url(@post) %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <%= auth_token %>
+    <label for="title">
+        Title: 
+        <input type="text" name="post[title]" id="title" value="<%= @post.title %>">
+    </label><br>
+    <label for="url">
+        URL: 
+        <input type="text" name="post[url]" id="url" value="<%= @post.url %>">
+    </label><br>
+    <label for="content">
+        Content: 
+        <textarea name="post[content]" id="content"><%= @post.content %></textarea>
+    </label><br>
+    <% Sub.all.each do |sub| %>
+        <label for="<% sub.title %>">
+            <input 
+                type="checkbox"
+                value="<%= sub.id %>"
+                name="post[sub_id]"
+                <%= "checked" if @post.sub_id == sub.id %>
+            >
+            <%= sub.title %>
+        </label><br>
+    <% end %>
+    <input type="submit" value="Submit">
+</form>
