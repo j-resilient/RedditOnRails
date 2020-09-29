@@ -1,4 +1,12 @@
 class PostsController < ApplicationController
+    before_action :require_login, only: [:new, :edit, :create, :update]
+    before_action :must_be_author, only: [:edit, :update]
+
+    def must_be_author
+        post = Post.find_by(id: params[:id])
+        redirect_to post_url(post) unless current_user.id == post.author
+    end
+    
     def new
         @post = Post.new
         render :new
@@ -20,11 +28,13 @@ class PostsController < ApplicationController
         render :show
     end
 
+
+
     def edit
         @post = Post.find_by(id: params[:id])
         render :edit
     end
-
+    
     def update
         @post = Post.find_by(id: params[:id])
         if @post.update(post_params)
