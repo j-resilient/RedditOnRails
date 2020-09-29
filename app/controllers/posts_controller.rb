@@ -28,8 +28,6 @@ class PostsController < ApplicationController
         render :show
     end
 
-
-
     def edit
         @post = Post.find_by(id: params[:id])
         render :edit
