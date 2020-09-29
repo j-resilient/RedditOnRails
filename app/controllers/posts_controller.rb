@@ -5,13 +5,13 @@ class PostsController < ApplicationController
     end
 
     def create
-        post = Post.new(post_params)
-        post.author_id = current_user.id
-        if post.save
-            redirect_to post_url(post)
-            render json: post
+        @post = Post.new(post_params)
+        @post.author_id = current_user.id
+        if @post.save
+            redirect_to post_url(@post)
+            render json: @post
         else
-            flash.now[:errors] = post.errors.full_messages
+            flash.now[:errors] = @post.errors.full_messages
             render :new
         end
     end
