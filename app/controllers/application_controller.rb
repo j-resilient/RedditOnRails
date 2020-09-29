@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    helper_method :current_user, :login!, :logout!
+    helper_method :current_user, :login!, :logout!, :require_login
 
     def current_user
         return nil if session[:session_token].nil?
@@ -15,5 +15,9 @@ class ApplicationController < ActionController::Base
         @current_user.reset_session_token! unless @current_user.nil?
         @current_user = nil
         session[:session_token] = nil
+    end
+
+    def require_login
+        redirect_to new_session_url unless current_user
     end
 end
