@@ -1,4 +1,12 @@
 class SubsController < ApplicationController
+    before_action :require_login, only: [:new, :create, :edit, :update]
+    before_action :must_be_moderator, only: [:edit, :update]
+
+    def must_be_moderator
+        sub = Sub.find_by(id: params[:id])
+        redirect_to sub_url(sub) unless current_user == sub.moderator
+    end
+
     def index
         @subs = Sub.all
         render :index
