@@ -10,6 +10,7 @@ class SubsController < ApplicationController
     end
 
     def new
+        @sub = Sub.new
         render :new
     end
 
