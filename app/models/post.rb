@@ -13,6 +13,13 @@
 #
 class Post < ApplicationRecord
     validates :title, :author_id, presence: true
+    validate :at_least_one_associated_sub
+
+    def at_least_one_associated_sub
+        if self.subs.size < 1
+            errors.add(:you, "must select at least one sub.")
+        end
+    end
 
     has_many :post_subs, dependent: :destroy, inverse_of: :post
     has_many :subs, through: :post_subs
