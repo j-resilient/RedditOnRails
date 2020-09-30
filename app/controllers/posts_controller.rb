@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
     def must_be_author
         post = Post.find_by(id: params[:id])
-        redirect_to post_url(post) unless current_user.id == post.author
+        redirect_to post_url(post) unless current_user == post.author
     end
     
     def new
@@ -45,6 +45,6 @@ class PostsController < ApplicationController
 
     private
     def post_params
-        params.require(:post).permit(:title, :url, :content, :sub_id)
+        params.require(:post).permit(:title, :url, :content, sub_ids: [])
     end
 end
