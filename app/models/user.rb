@@ -23,11 +23,14 @@ class User < ApplicationRecord
         foreign_key: :moderator_id,
         class_name: :Sub,
         dependent: :destroy
-
     has_many :posts,
         primary_key: :id,
         foreign_key: :author_id,
         class_name: :Post
+    has_many :comments,
+        primary_key: :id,
+        foreign_key: :author_id,
+        class_name: :Comment
 
     def password=(password)
         @password = password
