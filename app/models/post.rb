@@ -28,4 +28,10 @@ class Post < ApplicationRecord
         primary_key: :id,
         foreign_key: :author_id,
         class_name: :User
+
+    def comments_by_parent_id
+        comment_hash = Hash.new { |h, k| h[k] = [] }
+        self.comments.each { |c| comment_hash[c.parent_comment_id] << c }
+        comment_hash
+    end
 end
