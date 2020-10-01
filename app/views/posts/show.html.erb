@@ -13,6 +13,7 @@
     <% @post.comments.where(parent_comment_id: nil).each do |top_comment| %>
         <li>
             <%= link_to top_comment.content, comment_url(top_comment) %>
+            <%= render 'comments/comment', comment: top_comment %>
         </li>
     <% end %>
 </ul>
