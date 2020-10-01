@@ -1,0 +1,10 @@
+<h4>Reply to this comment:</h4>
+<form action="<%= comments_url %>" method="post">
+    <%= auth_token %>
+    <label for="body">
+        Body 
+        <textarea name="comment[content]" id="body"></textarea>
+    </label>
+    <input type="hidden" name="comment[parent_comment_id]" value="<%= @parent_id %>">
+    <input type="submit" value="Submit">
+</form>
