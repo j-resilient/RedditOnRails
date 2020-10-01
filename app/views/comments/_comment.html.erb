@@ -1,5 +1,6 @@
 <ul>
-    <% comment.child_comments.each do |child| %>
+    <% @all_comments.each do |child| %>
+        <% next unless child.parent_comment_id == comment.id %>
         <%= render 'comments/comment', comment: child %>
         <li><%= link_to child.content, comment_url(child) %></li>
     <% end %>
