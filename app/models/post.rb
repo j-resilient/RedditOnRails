@@ -29,6 +29,8 @@ class Post < ApplicationRecord
         foreign_key: :author_id,
         class_name: :User
 
+    has_many :votes, as: :votable
+
     def comments_by_parent_id
         comment_hash = Hash.new { |h, k| h[k] = [] }
         self.comments.each { |c| comment_hash[c.parent_comment_id] << c }
