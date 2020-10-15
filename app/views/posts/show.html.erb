@@ -1,6 +1,14 @@
 <h2><%= link_to @post.title, @post.url %> by <%= @post.author.username %></h2>
 <h4>Content:</h4><br>
 <p><%= @post.content %></p>
+<form action="<%= upvote_post_url %>" method="post">
+    <%= auth_token %>
+    <input type="submit" value="Upvote">
+</form>
+<form action="<%= downvote_post_url %>" method="post">
+    <%= auth_token %>
+    <input type="submit" value="Downvote">
+</form>
 <h4>Subs</h4>
 <ul>
     <% @post.subs.each do |sub| %>
