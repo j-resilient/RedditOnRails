@@ -44,8 +44,22 @@ class PostsController < ApplicationController
         end
     end
 
+    def upvote
+        vote(Vote.new(votable_id: params[:id], value: 1, votable_type: "Post"))
+    end
+    
+    def downvote
+        vote(Vote.new(votable_id: params[:id], value: -1, votable_type: "Post"))
+    end
+
     private
     def post_params
         params.require(:post).permit(:title, :url, :content, sub_ids: [])
+    end
+
+    def vote(vote)
+        vote.save
+        flash.now[:errors] = vote.errors.full_messages if vote.errors
+        redirect_to post_url(vote.votable_id)
     end
 end
