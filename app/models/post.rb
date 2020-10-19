@@ -11,6 +11,7 @@
 #  updated_at :datetime         not null
 #
 class Post < ApplicationRecord
+    include Votable
     validates :title, :author_id, presence: true
     validate :at_least_one_associated_sub
 
@@ -30,10 +31,6 @@ class Post < ApplicationRecord
         class_name: :User
 
     has_many :votes, as: :votable
-
-    def vote_sum
-        self.votes.pluck(:value).sum
-    end
 
     def comments_by_parent_id
         comment_hash = Hash.new { |h, k| h[k] = [] }
