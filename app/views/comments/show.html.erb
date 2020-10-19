@@ -1,3 +1,11 @@
+<form action="<%= upvote_comment_url %>" method="post">
+    <%= auth_token %>
+    <input type="submit" value="Upvote">
+</form>
+<form action="<%= downvote_comment_url %>" method="post">
+    <%= auth_token %>
+    <input type="submit" value="Downvote">
+</form>
 <h4>Reply to this comment:</h4>
 <form action="<%= comments_url %>" method="post">
     <%= auth_token %>
