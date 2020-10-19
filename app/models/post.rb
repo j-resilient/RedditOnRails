@@ -31,6 +31,10 @@ class Post < ApplicationRecord
 
     has_many :votes, as: :votable
 
+    def vote_sum
+        self.votes.pluck(:value).sum
+    end
+
     def comments_by_parent_id
         comment_hash = Hash.new { |h, k| h[k] = [] }
         self.comments.each { |c| comment_hash[c.parent_comment_id] << c }
