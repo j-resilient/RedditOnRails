@@ -20,7 +20,7 @@
 <ul>
     <% @comments_hash[nil].each do |top_comment| %>
         <li>
-            <%= link_to top_comment.content, comment_url(top_comment) %>
+            <%= link_to "(#{top_comment.vote_sum}) #{top_comment.content}", comment_url(top_comment) %>
             <%= render 'comments/comment', comment: top_comment, comments_hash: @comments_hash %>
         </li>
     <% end %>

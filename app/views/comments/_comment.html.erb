@@ -1,6 +1,6 @@
 <ul>
     <% comments_hash[comment.id].each do |child| %>
         <%= render 'comments/comment', comment: child, comments_hash: comments_hash %>
-        <li><%= link_to child.content, comment_url(child) %></li>
+        <li><%= link_to "(#{child.vote_sum}) #{child.content}", comment_url(child) %></li>
     <% end %>
 </ul>
