@@ -11,6 +11,7 @@
 #  parent_comment_id :integer
 #
 class Comment < ApplicationRecord
+    include Votable
     validates :content, :author_id, :post_id, presence: true
     
     belongs_to :author,
