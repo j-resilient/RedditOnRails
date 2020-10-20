@@ -1,3 +1,5 @@
+<p><%= @parent.vote_sum %> upvotes</p>
+
 <form action="<%= upvote_comment_url %>" method="post">
     <%= auth_token %>
     <input type="submit" value="Upvote">
@@ -13,6 +15,6 @@
         Body 
         <textarea name="comment[content]" id="body"></textarea>
     </label>
-    <input type="hidden" name="comment[parent_comment_id]" value="<%= @parent_id %>">
+    <input type="hidden" name="comment[parent_comment_id]" value="<%= @parent.id %>">
     <input type="submit" value="Submit">
 </form>
