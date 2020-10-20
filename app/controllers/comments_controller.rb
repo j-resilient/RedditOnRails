@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     end
 
     def show
-        @parent_id = params[:id]
+        @parent = Comment.find_by(id: params[:id])
         render :show
     end
 
